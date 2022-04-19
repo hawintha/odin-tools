@@ -8,14 +8,11 @@
     font-size: 30px;
 }
 
-#fullDisplay {
-    width: 100%;
-}
-
 #calcBtns {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
+
 #equals {
     grid-column: span 2;
 }
