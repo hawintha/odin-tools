@@ -28,8 +28,6 @@ function operate(operator, num1, num2) {
         case "multiplication": return multiply(num1, num2);
         case "division": return divide(num1, num2);
     }
-    exp2 = "";
-    operating = false;
 }
 function setOp(op) {
     switch (op.innerHTML) {
@@ -43,9 +41,10 @@ function setOp(op) {
 
 for (let digit of digits) {
     digit.addEventListener('click', () => {
-        if (operating === true) {
+        if (operating === true) { //if no longer switching ops, prepare display for exp2
             calcDisplay.value = "";
             finalOp = true;
+            operating = false;
         }
         calcDisplay.value += digit.innerHTML;
     });
@@ -58,6 +57,8 @@ for (let operator of operators) {
         if (finalOp) {
             exp2 = Number(calcDisplay.value);
             exp1 = operate(opType, exp1, exp2);
+            exp2 = "";
+            operating = false;
             calcDisplay.value = exp1;
         }
         finalOp = false;
@@ -66,7 +67,11 @@ for (let operator of operators) {
 };
 equalBtn.addEventListener('click', () => {
     exp2 = Number(calcDisplay.value);
-    calcDisplay.value = operate(opType, exp1, exp2);
+    exp1 = operate(opType, exp1, exp2);
+    exp2 = "";
+    operating = false;
+    finalOp = false;
+    calcDisplay.value = exp1;
 })
 clearBtn.addEventListener('click', () => {
     calcDisplay.value = "";
