@@ -6,7 +6,7 @@ const equalBtn = document.querySelector("#equals");
 let exp1;
 let exp2;
 let opType = "";
-let operating = false;
+let choosingOp = false;
 let finalOp = false;
 
 function add(a, b) {
@@ -29,24 +29,25 @@ function operate(operator, num1, num2) {
         case "division": return divide(num1, num2);
     }
 }
-function setOp(op) {
-    switch (op.innerHTML) {
-        case "+": opType = "addition"; break;
-        case "-": opType = "subtraction"; break;
-        case "*": opType = "multiplication"; break;
-        case "/": opType = "division"; break;
-    }
-    operating = true;
+function useExp() {
+    exp2 = Number(calcDisplay.value);
+    exp1 = operate(opType, exp1, exp2);
+    exp2 = "";
+    choosingOp = false;
+    calcDisplay.value = exp1;
 }
-
 for (let digit of digits) {
     digit.addEventListener('click', () => {
-        if (operating === true) { //if no longer switching ops, prepare display for exp2
+        if (choosingOp === true) { //if no longer switching ops, prepare display for exp2
             calcDisplay.value = "";
-            operating = false;
+            choosingOp = false;
             finalOp = true;
         }
-        calcDisplay.value += digit.innerHTML;
+        if (digit.innerHTML === "." && calcDisplay.value === "") {
+            calcDisplay.value += 0.;
+        } else {
+            calcDisplay.value += digit.innerHTML;
+        }
     });
 };
 for (let operator of operators) {
@@ -55,27 +56,29 @@ for (let operator of operators) {
             exp1 = Number(calcDisplay.value);
         }
         if (finalOp) {
-            exp2 = Number(calcDisplay.value);
-            exp1 = operate(opType, exp1, exp2);
-            exp2 = "";
-            operating = false;
-            calcDisplay.value = exp1;
+            useExp();
         }
         finalOp = false;
-        setOp(operator);
+        switch (operator.innerHTML) {
+            case "+": opType = "addition"; break;
+            case "-": opType = "subtraction"; break;
+            case "*": opType = "multiplication"; break;
+            case "/": opType = "division"; break;
+        }
+        choosingOp = true;
     });
 };
 equalBtn.addEventListener('click', () => {
-    exp2 = Number(calcDisplay.value);
-    exp1 = operate(opType, exp1, exp2);
-    exp2 = "";
+    if (!finalOp) {
+        return;
+    }
+    useExp();
     opType = "";
-    operating = false;
     finalOp = false;
-    calcDisplay.value = exp1;
 })
 clearBtn.addEventListener('click', () => {
     calcDisplay.value = "";
     exp1 = "";
     exp2 = "";
+    opType = "";
 })
