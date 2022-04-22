@@ -43,8 +43,8 @@ for (let digit of digits) {
     digit.addEventListener('click', () => {
         if (operating === true) { //if no longer switching ops, prepare display for exp2
             calcDisplay.value = "";
-            finalOp = true;
             operating = false;
+            finalOp = true;
         }
         calcDisplay.value += digit.innerHTML;
     });
@@ -69,6 +69,7 @@ equalBtn.addEventListener('click', () => {
     exp2 = Number(calcDisplay.value);
     exp1 = operate(opType, exp1, exp2);
     exp2 = "";
+    opType = "";
     operating = false;
     finalOp = false;
     calcDisplay.value = exp1;
