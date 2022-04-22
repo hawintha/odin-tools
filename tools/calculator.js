@@ -3,6 +3,8 @@ const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalBtn = document.querySelector("#equals");
+const signBtn = document.querySelector("#sign");
+const delBtn = document.querySelector("#backspace");
 let exp1;
 let exp2;
 let opType = "";
@@ -52,6 +54,9 @@ for (let digit of digits) {
 };
 for (let operator of operators) {
     operator.addEventListener('click', () => {
+        if (!calcDisplay.value) {
+            return;
+        }
         if (!opType) {
             exp1 = Number(calcDisplay.value);
         }
@@ -81,4 +86,17 @@ clearBtn.addEventListener('click', () => {
     exp1 = "";
     exp2 = "";
     opType = "";
+})
+signBtn.addEventListener('click', () => {
+    if (!calcDisplay.value) {
+        return;
+    }
+    if (calcDisplay.value > 0) {
+        calcDisplay.value = -Math.abs(calcDisplay.value);
+    } else {
+        calcDisplay.value = Math.abs(calcDisplay.value);
+    }
+})
+delBtn.addEventListener('click', () => {
+    calcDisplay.value = calcDisplay.value.substring(0, calcDisplay.value.length - 1);
 })
