@@ -45,8 +45,11 @@ for (let digit of digits) {
             choosingOp = false;
             finalOp = true;
         }
-        if (digit.innerHTML === "." && calcDisplay.value === "") {
-            calcDisplay.value += 0.;
+        if (digit.innerHTML === "." && calcDisplay.value.includes(".")) {
+            return;
+        }
+        if (digit.innerHTML === "." && (calcDisplay.value === "" || opType)) {
+            calcDisplay.value = "0.";
         } else {
             calcDisplay.value += digit.innerHTML;
         }
@@ -86,6 +89,7 @@ clearBtn.addEventListener('click', () => {
     exp1 = "";
     exp2 = "";
     opType = "";
+    finalOp = false;
 })
 signBtn.addEventListener('click', () => {
     if (!calcDisplay.value) {
