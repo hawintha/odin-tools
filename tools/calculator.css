@@ -12,16 +12,15 @@
     --color-tertiary: #E58E9E;
 }
 
-.material-symbols-outlined {
-    font-variation-settings:
-        'FILL' 0,
-        'wght' 400,
-        'GRAD' 0,
-        'opsz' 48
+body {
+    background: linear-gradient(to right, var(--color-primary-light), var(--color-primary-lighter));
 }
 
 h1 {
+    font-size: 50px;
     text-align: center;
+    color: var(--color-primary-lightest);
+    text-shadow: 2px -2px var(--color-tertiary);
 }
 
 #calcBody {
@@ -30,6 +29,21 @@ h1 {
     background-color: var(--color-secondary-light);
     padding: 10px;
     border-radius: 6px;
+}
+
+#calcHistory {
+    height: 30px;
+    width: 100%;
+    padding-right: 10px;
+    text-align: right;
+    font-size: 15px;
+    outline: none;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: var(--color-tertiary);
+    background-color: var(--color-secondary-dark);
+    box-shadow: inset 0 1px 1px var(--color-secondary-darkest), 0px 1px var(--color-secondary-lightest);
 }
 
 #calcDisplay {
@@ -41,10 +55,10 @@ h1 {
     font-size: 30px;
     outline: none;
     border: none;
-    border-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     color: var(--color-primary-lightest);
     background-color: var(--color-secondary-dark);
-    box-shadow: inset 0 1px 1px var(--color-secondary-darkest), 0px 1px var(--color-secondary-lightest);
 }
 
 #calcBtns {
@@ -66,6 +80,9 @@ h1 {
 
 #calcBtns button:active {
     transform: translateY(1px);
+}
+
+#calcBtns button:hover {
     box-shadow: inset 0 1px 1px var(--color-secondary-darkest), 0px 1px var(--color-secondary-lightest);
 }
 
@@ -84,4 +101,19 @@ h1 {
 #calcBtns #clear {
     color: var(--color-primary-lightest);
     background-color: var(--color-tertiary);
+}
+
+footer {
+    color: var(--color-tertiary);
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    font-size: 20px;
+    padding: 10px;
+    letter-spacing: 4px;
+}
+
+footer a {
+    color: inherit;
 }

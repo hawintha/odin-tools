@@ -7,20 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculator</title>
     <link rel="stylesheet" href="calculator.css">
-    <link rel="stylesheet"
-        href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
     <h1>Simple Calculator</h1>
     <div id="calcBody">
-        <input type="text" name="calcDisplay" id="calcDisplay" placeholder="0">
+        <div id="calcScreen">
+            <input type="text" name="calcHistory" id="calcHistory" disabled>
+            <input type="text" name="calcDisplay" id="calcDisplay" placeholder="0">
+        </div>
         <div id="calcBtns">
             <button class="digit">7</button>
             <button class="digit">8</button>
             <button class="digit">9</button>
             <button id="sign">±</button>
-            <button id="backspace"><span class="material-symbols-outlined">keyboard_backspace</span></button>
+            <button id="backspace"><i class="fa-solid fa-delete-left"></i></button>
             <button class="digit">4</button>
             <button class="digit">5</button>
             <button class="digit">6</button>
@@ -38,8 +39,12 @@
 
         </div>
     </div>
-
+    <footer>
+        <span>© 2022 Hawintha</span>
+        <a href="https://github.com/hawintha/odin-tools"><i class="fa-brands fa-github"></i></a>
+    </footer>
     <script src="calculator.js"></script>
+    <script src="https://kit.fontawesome.com/f121a2fb08.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

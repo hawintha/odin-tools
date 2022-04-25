@@ -1,4 +1,5 @@
 const calcDisplay = document.querySelector("#calcDisplay");
+const calcHistory = document.querySelector("#calcHistory");
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
@@ -10,25 +11,14 @@ let exp2;
 let opType = "";
 let choosingOp = false;
 let finalOp = false;
+let usingResult = false;
 
-function add(a, b) {
-    return a + b;
-}
-function subtract(a, b) {
-    return a - b;
-}
-function multiply(a, b) {
-    return a * b;
-}
-function divide(a, b) {
-    return a / b;
-}
-function operate(operator, num1, num2) {
+function operate(operator, a, b) {
     switch (operator) {
-        case "addition": return add(num1, num2);
-        case "subtraction": return subtract(num1, num2);
-        case "multiplication": return multiply(num1, num2);
-        case "division": return divide(num1, num2);
+        case "+": return a + b;
+        case "-": return a - b;
+        case "*": return a * b;
+        case "/": return a / b;
     }
 }
 function useExp() {
@@ -36,7 +26,11 @@ function useExp() {
     exp1 = operate(opType, exp1, exp2);
     exp2 = "";
     choosingOp = false;
-    calcDisplay.value = exp1;
+    calcDisplay.value = exp1; //allow the use of result as exp1 if operator is chosen after equals
+}
+function updateCalcScreen() {
+    calcDisplay.value = "";
+    calcHistory.value = `${exp1} ${opType}`;
 }
 for (let digit of digits) {
     digit.addEventListener('click', () => {
@@ -45,10 +39,17 @@ for (let digit of digits) {
             choosingOp = false;
             finalOp = true;
         }
+        if (usingResult) {
+            calcDisplay.value += digit.innerHTML;
+            return;
+        } else if (exp1 && !calcHistory.value) { //don't use result as exp1 if digit is chosen after equals
+            exp1 = "";
+            calcDisplay.value = "";
+        }
         if (digit.innerHTML === "." && calcDisplay.value.includes(".")) {
             return;
         }
-        if (digit.innerHTML === "." && (calcDisplay.value === "" || opType)) {
+        if (digit.innerHTML === "." && calcDisplay.value === "") {
             calcDisplay.value = "0.";
         } else {
             calcDisplay.value += digit.innerHTML;
@@ -58,7 +59,7 @@ for (let digit of digits) {
 for (let operator of operators) {
     operator.addEventListener('click', () => {
         if (!calcDisplay.value) {
-            return;
+            exp1 = 0;
         }
         if (!opType) {
             exp1 = Number(calcDisplay.value);
@@ -67,29 +68,34 @@ for (let operator of operators) {
             useExp();
         }
         finalOp = false;
+        usingResult = false;
         switch (operator.innerHTML) {
-            case "+": opType = "addition"; break;
-            case "-": opType = "subtraction"; break;
-            case "*": opType = "multiplication"; break;
-            case "/": opType = "division"; break;
+            case "+": opType = "+"; break;
+            case "-": opType = "-"; break;
+            case "*": opType = "*"; break;
+            case "/": opType = "/"; break;
         }
+        updateCalcScreen();
         choosingOp = true;
     });
 };
 equalBtn.addEventListener('click', () => {
-    if (!finalOp) {
-        return;
-    }
+    if (!finalOp) return;
     useExp();
     opType = "";
     finalOp = false;
+    calcHistory.value = "";
 })
-clearBtn.addEventListener('click', () => {
+function clearAll() {
     calcDisplay.value = "";
     exp1 = "";
     exp2 = "";
     opType = "";
     finalOp = false;
+}
+clearBtn.addEventListener('click', () => {
+    clearAll();
+    updateCalcScreen();
 })
 signBtn.addEventListener('click', () => {
     if (!calcDisplay.value) {
@@ -103,4 +109,5 @@ signBtn.addEventListener('click', () => {
 })
 delBtn.addEventListener('click', () => {
     calcDisplay.value = calcDisplay.value.substring(0, calcDisplay.value.length - 1);
+    usingResult = true;
 })
