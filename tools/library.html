@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="library.css">
+</head>
+
+<body>
+    <h1>My Movie Library</h1>
+
+    <form action="#">
+        <label for="titleInput">Title</label>
+        <input id="titleInput" type="text">
+
+        <label for="yearInput">Year Released</label>
+        <input id="yearInput" type="text">
+
+        <label for="watchStatus">Status</label>
+        <select name="" id="watchStatus">
+            <option value="watched">Watched</option>
+            <option value="unwatched">Unwatched</option>
+        </select>
+        <button id="addBtn" type="submit">Add</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Finding Nemo</td>
+                <td>2003</td>
+                <td>Watched</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="library.js"></script>
+</body>
+
+</html>
