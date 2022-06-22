@@ -9,15 +9,12 @@ class Movie {
 }
 
 movies.push(new Movie("Finding Nemo", 2003, "Watched"));
-let id = 1;
 function addMovie(title, year, watchStatus) {
     let newMovie = new Movie(title, year, watchStatus)
     movies.push(newMovie);
     console.log(movies);
-    const table = document.querySelector('table');
-    const row = table.insertRow();
-    row.dataset.id = id;
-    id++;
+    const tbody = document.querySelector('tbody');
+    const row = tbody.insertRow();
     const titleCell = row.insertCell();
     titleCell.textContent = title
     const yearCell = row.insertCell();
@@ -42,10 +39,17 @@ function addMovie(title, year, watchStatus) {
 document.querySelector('body').addEventListener('click', (e) => {
     const titleInput = document.querySelector('#titleInput');
     const yearInput = document.querySelector('#yearInput');
-    const watchStatus = document.querySelector('#watchStatus');
+    const statusSelect = document.querySelector('#statusSelect');
     if (e.target.id === "addBtn" && titleInput.value) {
-        addMovie(titleInput.value, yearInput.value, watchStatus.value);
-        titleInput.value = "", yearInput.value = "", watchStatus.value = "Watched";
+        addMovie(titleInput.value, yearInput.value, statusSelect.value);
+        titleInput.value = "", yearInput.value = "", statusSelect.value = "Watched";
+    }
+    else if (e.target.classList.contains("updateBtn")) {
+        if (e.target.parentElement.previousElementSibling.textContent === "Watched") {
+            e.target.parentElement.previousElementSibling.textContent = "Unwatched";
+        } else {
+            e.target.parentElement.previousElementSibling.textContent = "Watched";
+        }
     }
     else if (e.target.classList.contains("deleteBtn")) {
         const title = e.target.parentElement.parentElement.firstElementChild.textContent;
