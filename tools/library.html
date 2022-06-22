@@ -14,15 +14,15 @@
 
     <form action="#">
         <label for="titleInput">Title</label>
-        <input id="titleInput" type="text">
+        <input id="titleInput" type="text" required>
 
         <label for="yearInput">Year Released</label>
         <input id="yearInput" type="text">
 
         <label for="watchStatus">Status</label>
         <select name="" id="watchStatus">
-            <option value="watched">Watched</option>
-            <option value="unwatched">Unwatched</option>
+            <option value="Watched">Watched</option>
+            <option value="Unwatched">Unwatched</option>
         </select>
         <button id="addBtn" type="submit">Add</button>
     </form>
@@ -33,6 +33,7 @@
                 <th>Title</th>
                 <th>Year</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +41,9 @@
                 <td>Finding Nemo</td>
                 <td>2003</td>
                 <td>Watched</td>
+                <td><button class="updateBtn">Update</button><button class="editBtn">Edit</button><button
+                        class="deleteBtn">Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>
