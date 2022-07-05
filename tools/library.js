@@ -48,11 +48,11 @@ function deleteMovie(index, node) {
     node.remove();
 }
 
-let index = 0;
 document.querySelector('body').addEventListener('click', (e) => {
     let titleInput = document.querySelector('#titleInput');
     let yearInput = document.querySelector('#yearInput');
     let statusSelect = document.querySelector('#statusSelect');
+    let index = 0;
     const watchStatus = e.target.parentElement.previousElementSibling.textContent;
 
     if (e.target.id === "addBtn" && titleInput.value) {
@@ -88,12 +88,16 @@ document.querySelector('body').addEventListener('click', (e) => {
         titleInput.value = e.target.parentElement.parentElement.firstElementChild.textContent;
         yearInput.value = e.target.parentElement.parentElement.children.item(1).textContent;
         statusSelect.value = watchStatus;
-
         index = findMovieIndex(e.target.parentElement.parentElement.firstElementChild.textContent);
+        if (document.querySelector('.editing')) {
+            document.querySelector('.editing').classList.remove("editing");
+        }
         e.target.parentElement.parentElement.classList.add("editing");
         const addBtn = document.querySelector('#addBtn');
-        addBtn.textContent = "Save";
-        addBtn.id = "saveBtn";
+        if (addBtn) {
+            addBtn.textContent = "Save";
+            addBtn.id = "saveBtn";
+        }
     }
     else if (e.target.classList.contains("deleteBtn")) {
         deleteMovie(findMovieIndex(e.target.parentElement.parentElement.firstElementChild.textContent), e.target.parentElement.parentElement)
