@@ -1,3 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 40px 185px 110px 185px 60px 100px 100px;
+    justify-content: center;
+    justify-items: end;
+    gap: 5px;
+}
+
+input, select {
+    width: 100%;
+}
+
+@media (max-width: 800px) {
+    form {
+        grid-template-columns: 110px 1fr;
+        justify-items: start;
+    }
+}
+
+#addBtn {
+    width: 60px;
+    justify-self: center;
+}
+
 table {
     width: 100%;
 }
